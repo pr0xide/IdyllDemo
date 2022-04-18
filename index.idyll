@@ -1,0 +1,96 @@
+[meta title:"IS-445 DATA VISUALIZATION IDYLL WEBPAGE" description:"WEEK 12 PROGRAMMING ASSIGNMENT" /]
+
+[Header
+  fullWidth:true
+  title:"IS-445 DATA VISUALIZATION IDYLL WEBPAGE"
+  subtitle:"WEEK 12 PROGRAMMING ASSIGNMENT"
+  author:"Puru Joshi"
+  authorLink:""
+  date:`(new Date()).toDateString()`
+  background:"#222222"
+  color:"#ffffff"
+   /]
+
+# USING BUILT-IN COMPONENTS
+
+## 1. PREVIEW
+#### Noxus Empire in League Of Legends
+
+[Preview title:"Noxus" description:"League Of Legends" url:"https://universe.leagueoflegends.com/en_US/region/noxus/" media:"https://i.pinimg.com/564x/e7/a4/4e/e7a44e1d0a1e43ca0373a5f20cb5deb1.jpg"/]
+
+[div style:`{backgroundColor: 'white', padding: '20px'}`][/div]
+
+## 2. STEPPER
+#### Champions From The Noxus Empire
+[var name:"stepperIndex" value:0 /]
+
+[Stepper currentStep:stepperIndex fullWidth: true]
+  [Graphic]
+     [img src:`"static/images/" + stepperIndex + ".jpg"` /]
+  [/Graphic]
+
+  [Step]
+    [Swain](https://www.leagueoflegends.com/en-us/champions/swain/)
+  [/Step]
+  [Step]
+    [Darius](https://www.leagueoflegends.com/en-pl/champions/darius/)
+  [/Step]
+  [Step]
+    [Vladimir](https://www.leagueoflegends.com/en-us/champions/vladimir/)
+  [/Step]
+
+  [StepperControl /]
+[/Stepper]
+
+[div style:`{backgroundColor: 'white', padding: '20px'}`][/div]
+
+## 3. TABLE
+#### Popular Champions Based On Pick Rate
+[Table data:`[{Champion: 'Jinx' , Popularity: '21.3%'}, {Champion: 'Kai\'Sa' , Popularity: '20.2%'}, {Champion: 'Lucian' , Popularity: '19.2%'}, {Champion: 'Ezreal' , Popularity: '16.9%'}, {Champion: 'Ahri' , Popularity: '16.2%'}]` /]
+
+[div style:`{backgroundColor: 'white', padding: '20px'}`][/div]
+
+## 4. RANGE
+#### A Slider For A Random Variable
+
+[var name:"myVar" value:10 /]
+[Range value:myVar min:0 max:100 /]
+[Display value:myVar /]
+
+## 5. Vega-lite Plot
+
+#### Importing Dataset And Displaying It In A Table
+The dataset has been taken from [link text:"here" url:"https://vincentarelbundock.github.io/Rdatasets/datasets.html"/]. The dataset is hosted on github as part of a library of different databases, that can be used for analysis by Data Analysts and Data Scientists.
+
+The dataset that we used here, is called 'WWWusage'. It shows a time series of the numbers of users connected to the Internet through a server every minute. The time series is of length 100. This is also shown through the plot below. The original source of the dataset is from a study 'Time Series Analysis by State Space Methods' by Durbin, J. and Koopman, S. J. (2001).
+
+[data name:"WWWusage" source:"WWWusage.csv" /]
+[Table data:WWWusage /]
+
+[div style:`{backgroundColor: 'white', padding: '20px'}`][/div]
+
+#### Plotting The Graph
+[var name:"color_var" value:"blue" /]
+
+[IdyllVegaLite data:WWWusage spec:`{
+  width: 500,
+  height: 500,
+  mark: "line",
+  encoding: {
+    x: {
+      field: "time",
+      type: "quantitative",
+      axis: {title: "Time Series"}
+    },
+    y: {
+      field: "value",
+      type: "quantitative",
+      axis: {title: "Number of users"}
+    },
+    config: {
+      mark: {
+        color: color_var
+      }
+    }
+  }
+}` /]
